@@ -12,7 +12,7 @@ def hrmn(time):
     mn = int(round(mn * 60 / 100, 2)  * 100)
     return "{:02d}:{:02d}".format(math.floor(hr), mn)
 
-def sunlight(Latitude, timesec):
+def sunlight(Latitude, Longitude, timesec):
     E2 = 0.1/24
     # Julian Day
     JD = (timesec / 86400.0) + 2440587.5 + E2 - timezone/24
@@ -53,14 +53,14 @@ def sunlight(Latitude, timesec):
     sunset = noon+sunrised*4/1440
     duration = 8*sunrised
     return [duration, sunrise, noon, sunset]
-print(sunlight(Latitude, timesec))
+print(sunlight(Latitude, Longitude, timesec))
 
-dayhours = sunlight(Latitude, timesec)[0] / 6
-nighthours = (1440 - sunlight(Latitude, timesec)[0]) / 6
+dayhours = sunlight(Latitude, Longitude, timesec)[0] / 6
+nighthours = (1440 - sunlight(Latitude, Longitude, timesec)[0]) / 6
 print('Day segment lenght',dayhours)
 print('Night segment lenght',nighthours)
 
-d1 = sunlight(Latitude, timesec)[1] * 24 * 60
+d1 = sunlight(Latitude, Longitude, timesec)[1] * 24 * 60
 earlymorning = []
 daylight = []
 night = []

@@ -1,15 +1,16 @@
 import math
+import time
 
 Latitude = 36
 Longitude = -119
 timezone = -8
-timesec = 1669920223
+timesec = time.time()
 
 def hrmn(time):
     hr = time * 24
     mn = hr - math.floor(hr)
     mn = int(round(mn * 60 / 100, 2)  * 100)
-    return "{}:{}".format(math.floor(hr), mn)
+    return "{:02d}:{:02d}".format(math.floor(hr), mn)
 
 def sunlight(Latitude, timesec):
     E2 = 0.1/24
@@ -51,7 +52,42 @@ def sunlight(Latitude, timesec):
     sunrise = noon-sunrised*4/1440
     sunset = noon+sunrised*4/1440
     duration = 8*sunrised
-    return [duration, hrmn(sunrise), hrmn(noon), hrmn(sunset)]
+    return [duration, sunrise, noon, sunset]
 print(sunlight(Latitude, timesec))
 
+dayhours = sunlight(Latitude, timesec)[0] / 6
+nighthours = (1440 - sunlight(Latitude, timesec)[0]) / 6
+print('Day segment lenght',dayhours)
+print('Night segment lenght',nighthours)
 
+d1 = sunlight(Latitude, timesec)[1] * 24 * 60
+earlymorning = []
+daylight = []
+night = []
+for x in range(3):
+    m1 = d1 - (nighthours * (3 - x))
+    m1 = math.fabs(m1) / 60 / 24 
+    earlymorning += [hrmn(m1)]
+for x in range(6):
+    dz = d1 + (dayhours * x)
+    dz = dz / 60 / 24
+    daylight += [hrmn(dz)]
+dz = d1 + (dayhours * 6)
+for x in range(3):
+    m1 = dz + (nighthours * x)
+    m1 = m1 / 60 / 24 
+    night += [hrmn(m1)]
+
+times = earlymorning + daylight + night
+print('Mouse:',times[0])
+print('Ox:',times[1])
+print('Tiger:',times[2])
+print('Rabit:',times[3])
+print('Dragon:',times[4])
+print('Snake:',times[5])
+print('Horse:',times[6])
+print('Sheep:',times[7])
+print('Monkey:',times[8])
+print('Rooster:',times[9])
+print('Dog:',times[10])
+print('Boar:',times[11])

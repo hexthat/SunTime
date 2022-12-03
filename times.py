@@ -79,7 +79,7 @@ for x in range(3):
     night += [hrmn(m1)]
 
 times = earlymorning + daylight + night
-print('Mouse:',times[0])
+print('Rat:',times[0])
 print('Ox:',times[1])
 print('Tiger:',times[2])
 print('Rabit:',times[3])
@@ -88,6 +88,6 @@ print('Snake:',times[5])
 print('Horse:',times[6])
 print('Sheep:',times[7])
 print('Monkey:',times[8])
-print('Rooster:',times[9])
+print('Bird:',times[9])
 print('Dog:',times[10])
 print('Boar:',times[11])
